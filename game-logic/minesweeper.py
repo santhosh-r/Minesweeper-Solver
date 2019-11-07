@@ -2,7 +2,8 @@ from random import randint
 import numpy as np
 from queue import PriorityQueue
 import itertools
-from collections import defaultdict 
+from collections import defaultdict
+import matplotlib.pyplot as plt
 
 def surrounding_cells(x, y, rows, cols):
   cells = []
@@ -127,17 +128,26 @@ def autoplay(rows, cols, n):
       return False
 
 def main():
-  n = 1000
-  wins = 0
-  losses = 0
-  for i in range(n):
-    if autoplay(20,20,10):
-      wins += 1
-    else:
-      losses += 1
-    if (i%100)==0 and i!=0:
-      print(wins, losses, wins / i)
-  print("total",wins, losses, wins/n)
+  rates=[]
+  mines=40
+  for m in range(mines):
+      n = 200
+      wins = 0
+      losses = 0
+      for i in range(n):
+        if autoplay(10,10,m):
+          wins += 1
+        else:
+          losses += 1
+        if (i % 100) == 0 and i != 0:
+          print(wins, losses, wins / i)
+      print("total",wins, losses, wins/n)
+      rates.append(wins/n)
+  plt.plot(np.arange(mines),rates)
+  plt.ylabel("win rates over 200 trials")
+  plt.xlabel("mines")
+  plt.show()
+
 
 if __name__ == '__main__':
   main()
