@@ -131,13 +131,13 @@ def main():
   wins = 0
   losses = 0
   for i in range(n):
-    if autoplay(10, 10,20):
+    if autoplay(20,20,10):
       wins += 1
     else:
       losses += 1
-    if (i%100)==0:
-      print(wins, losses, wins / n)
-  print(wins, losses, wins/n)
+    if (i%100)==0 and i!=0:
+      print(wins, losses, wins / i)
+  print("total",wins, losses, wins/n)
 
 if __name__ == '__main__':
   main()
